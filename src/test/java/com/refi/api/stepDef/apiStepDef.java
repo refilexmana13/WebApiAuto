@@ -14,7 +14,7 @@ public class apiStepDef {
 
     @Given("I have the API endpoint")
     public void iHaveTheAPIEndpoint() {
-
+        api = new baseApi();
     }
 
     @When("I send a GET request to the endpoint")
@@ -28,5 +28,15 @@ public class apiStepDef {
     public void iShouldReceiveAStatusCode(int statusCode) {
 
         Assert.assertEquals(statusCode, response.getStatusCode());
+    }
+
+    @When("I send a POST request to the endpoint with user data")
+    public void iSendAPOSTRequestToTheEndpointWithUserData() {
+
+        String email = "random" + System.currentTimeMillis() + "@yopmail.com";
+
+        response = api.createUser("Rey", "mysterio", email);
+
+
     }
 }

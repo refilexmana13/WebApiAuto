@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.Refi'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation group: 'io.rest-assured', name: 'json-schema-validator', version: '6.0.0'
+
+    // Cucumber untuk JUnit 4
+    testImplementation 'io.cucumber:cucumber-junit:7.15.0'
+    testImplementation 'io.cucumber:cucumber-java:7.15.0'
+
+    // JUnit 4
+    testImplementation 'junit:junit:4.13.2'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.14.1'
+
+    testImplementation group: 'org.json', name: 'json', version: '20251224'
+
+    // Dotenv for environment variables
+    testImplementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+
+}
+
+test {
+    useJUnit()
+
+    filter {
+        includeTestsMatching "com.refi.api.runner.*"
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}

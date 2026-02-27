@@ -27,17 +27,52 @@ dependencies {
     testImplementation 'io.github.cdimascio:dotenv-java:3.0.0'
 
 
+    // Selenium WebDriver untuk UI testing
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.40.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:6.3.3'
+
+
 }
 
 test {
     useJUnit()
 
     filter {
-        includeTestsMatching "com.refi.api.runner.*"
+        includeTestsMatching "com.refi.**.*Test"
     }
 
     testLogging {
         events "passed", "skipped", "failed"
         showStandardStreams = true
     }
+}
+
+tasks.register('runApiTests', Test) {
+    useJUnit()
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    outputs.upToDateWhen { false }
+
+    // Run only the API test runner
+    filter {
+        includeTestsMatching 'com.refi.api.runner.*'
+    }
+
+    description = 'Run API tests with Cucumber'
+    group = 'verification'
+}
+
+tasks.register("runWebTests", Test) {
+    useJUnit()
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    outputs.upToDateWhen { false }
+
+    // Run only the Web test runner
+    filter {
+        includeTestsMatching 'com.refi.web.runner.*'
+    }
+
+    description = 'Run Web tests with Cucumber'
+    group = 'verification'
 }

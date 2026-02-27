@@ -33,11 +33,14 @@ Gunakan perintah ini untuk membersihkan build lama dan menjalankan seluruh suite
 ```bash
 ./gradlew clean test
 
-### **2. Menjalankan Semua API Test**
+### 2. Menjalankan Semua API Test
+```bash
 ./gradlew test runApiTests
 
-### **3. Menjalankan Semua API Test**
+### 3. Menjalankan Semua API Test
+```bash
 ./gradlew test runWebTests
+
 
 
 

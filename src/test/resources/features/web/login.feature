@@ -1,7 +1,7 @@
-@Web
+@web
 Feature: Login
 
-  @invalid-Login
+  @valid-Login
   Scenario: login with valid username and password
     Given user is on login page
     And user input username and password text with "standard_user" and "secret_sauce"

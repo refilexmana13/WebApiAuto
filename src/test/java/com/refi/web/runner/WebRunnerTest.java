@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "classpath:features/web",
         glue = "com.refi.web.stepDef",
         plugin = {"pretty", "html:target/cucumber-report-web.html"},
-        tags = "@Web"
+        tags = "@web"
 )
 
 public class WebRunnerTest {

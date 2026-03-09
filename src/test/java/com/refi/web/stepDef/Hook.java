@@ -1,21 +1,20 @@
 package com.refi.web.stepDef;
 
-import com.refi.web.base.BaseTest;
+import com.refi.web.base.BaseWeb;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-public class Hook extends BaseTest {
+public class Hook extends BaseWeb {
 
     @Before
     public void setUp() {
-        System.out.println("DEBUG: Hook sedang berjalan, menyiapkan driver...");
+        System.out.println("Hook sedang berjalan, menyiapkan driver...");
         getDriver();
+        BaseWeb.driver.get(baseUrl);
     }
 
     @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void tearDown(){
+        close();
     }
 }

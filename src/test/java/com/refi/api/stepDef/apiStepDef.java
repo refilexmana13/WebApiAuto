@@ -1,18 +1,24 @@
 package com.refi.api.stepDef;
 
 import com.refi.api.baseApi.baseApi;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.Assert;
+
+import java.io.File;
 
 public class apiStepDef {
 
     private baseApi api = new baseApi();
     private Response response;
     private String savedUserID; //untuk menampung ID
+    private File jsonSchema = new  File("src/test/resources/JsonSchema/GetJsonSchema.json");
+    String invalidID = "69ab0045eeddd63291654776";
 
     @Given("I have the API endpoint")
     public void iHaveTheAPIEndpoint() {
@@ -23,6 +29,7 @@ public class apiStepDef {
     public void iSendAGETRequestToTheEndpoint() {
         response = api.getListUser();
         Assert.assertNotNull("Response is null!", response);
+        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(jsonSchema));
 
     }
 
@@ -70,5 +77,12 @@ public class apiStepDef {
     public void iSendADELETERequestToTheEndpoint() {
         System.out.println("Menghapus User dengan ID -> " + savedUserID);
         response = api.deleteUser(savedUserID);
+
+    }
+
+    @And("I Send a DELETE request with invalid ID")
+    public void iSendADELETERequestWithInvalidID() {
+        System.out.println("Menghapus User dengan ID -> " + invalidID);
+        response = api.deleteUser(invalidID);
     }
 }

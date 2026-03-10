@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features/api",
         glue = "com.refi.api.stepDef",
-        plugin = {"pretty", "html:target/cucumber-report-api.html"},
+        plugin = {"pretty", "html:target/cucumber-report-api.html",
+                "json:target/cucumber-report-api.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         tags = "@api"
 )
 

@@ -1,5 +1,10 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.12.0"
+}
+
+allure {
+    version = '2.24.0'
 }
 
 group = 'org.Refi'
@@ -31,6 +36,8 @@ dependencies {
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.40.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:6.3.3'
 
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.21.0'
+
 
 }
 
@@ -38,6 +45,7 @@ test {
     useJUnit()
 
     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    systemProperty "allure.results.directory", "build/allure-results"
 
     filter {
         includeTestsMatching "com.refi.**.*Test"

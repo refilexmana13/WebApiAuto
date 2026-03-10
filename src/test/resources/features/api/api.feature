@@ -28,3 +28,8 @@ Feature: My API
     When I send a POST request to the endpoint with user data
     And I Send a DELETE request to the endpoint
     Then I should receive a 200 status code
+
+  Scenario: Delete with invalid ID
+    Given I have the API endpoint
+    And I Send a DELETE request with invalid ID
+    Then I should receive a 404 status code

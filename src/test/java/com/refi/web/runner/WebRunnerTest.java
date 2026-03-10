@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features/web",
         glue = "com.refi.web.stepDef",
-        plugin = {"pretty", "html:target/cucumber-report-web.html"},
+        plugin = {"pretty", "html:target/cucumber-report-web.html",
+                "json:target/cucumber-report-web.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         tags = "@web"
 )
 
